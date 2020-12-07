@@ -2,7 +2,7 @@
     "name": "hxs9712/wechathxs",
     "description": "微信便捷开发接口库",
     "type": "library",
-    "license": "hxs-license",
+    "license": "apache-2.0",
     "authors": [
         {
             "name": "'Hsb9712'",
