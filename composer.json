@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "hxs9712\\wechathxs": "src/"
+            "hxs9712\\wechathxs\\": "src/"
         }
     }
 }
