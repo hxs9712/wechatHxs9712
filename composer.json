@@ -1,0 +1,20 @@
+{
+    "name": "hxs9712/wechathxs",
+    "description": "微信便捷开发接口库",
+    "type": "library",
+    "license": "hxs-license",
+    "authors": [
+        {
+            "name": "'Hsb9712'",
+            "email": "3056953305@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "hxs9712\\wechathxs": "src/"
+        }
+    }
+}
