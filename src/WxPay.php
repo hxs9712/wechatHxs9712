@@ -19,14 +19,14 @@ class WxPay
      * OrderController constructor.
 
      */
-    public function __construct($appId,$mch_id,$key)
+    private function __construct($appId,$mch_id,$key)
     {
         $this->app = ['appId'=>$appId,'mch_id'=>$mch_id,'key'=>$key];
         $this->url = "https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi";
     }
 
 
-    public static function getInstance(){
+    public static function getInstance($appId,$mch_id,$key){
         //判断实例有无创建，没有的话创建实例并返回，有的话直接返回
         if(!(self::$instance instanceof self)){
             self::$instance = new self();
@@ -41,24 +41,24 @@ class WxPay
     public function unifiedorder($total_fee,$notify_url,$openid,$cert_path,$key_path,$nonce_str=null,$body="支付",$out_trade_no=null)
     {
         $post = array();
-        $post['appid']		=  $this->app['appid'];
-        $post['mch_id']		=  $this->app['mch_id'];
-        $post['nonce_str']	= $nonce_str??$this->randStr(30);
-        $post['body']		= $body; //商品描述
-        $post['out_trade_no']	= $out_trade_no??rand(111111,999999);
-        $post['total_fee']		= $total_fee*10;
-        $post['spbill_create_ip']	= $_SERVER['REMOTE_ADDR'];
-        $post['notify_url']			= 'http://baidu.com';
-        $post['trade_type']			= 'JSAPI';
-        $post['openid']				= 'oH0PywxNYs01UB5Zi-VRSpi3SWKY';
-        $post['cert_path']				= $cert_path;//payment/apiclient_cert.pem
-        $post['key_path']				= $key_path;//payment/apiclient_key.pem
+        $post['appid']      =  $this->app['appid'];
+        $post['mch_id']     =  $this->app['mch_id'];
+        $post['nonce_str']  = $nonce_str??$this->randStr(30);
+        $post['body']       = $body; //商品描述
+        $post['out_trade_no']   = $out_trade_no;
+        $post['total_fee']      = $total_fee*10;
+        $post['spbill_create_ip']   = $_SERVER['REMOTE_ADDR'];
+        $post['notify_url']         = $notify_url;
+        $post['trade_type']         = 'JSAPI';
+        $post['openid']             = $openid;
+        $post['cert_path']              = $cert_path;//payment/apiclient_cert.pem
+        $post['key_path']               = $key_path;//payment/apiclient_key.pem
 
         //排序
         ksort($post);
         //生成sign
-        $str 	= urldecode(http_build_query($post)).'&key='.$this->app['key'];
-        $sign 	= strtoupper(md5($str));
+        $str    = urldecode(http_build_query($post)).'&key='.$this->app['key'];
+        $sign   = strtoupper(md5($str));
 
         $post['sign'] = $sign;
 
