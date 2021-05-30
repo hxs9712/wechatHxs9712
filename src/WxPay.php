@@ -29,7 +29,7 @@ class WxPay
     public static function getInstance($appId,$mch_id,$key){
         //判断实例有无创建，没有的话创建实例并返回，有的话直接返回
         if(!(self::$instance instanceof self)){
-            self::$instance = new self();
+            self::$instance = new self($appId,$mch_id,$key);
         }
         return self::$instance;
     }
